@@ -1,0 +1,360 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		700000000000000000000001 /* TimeCookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000001 /* TimeCookApp.swift */; };
+		700000000000000000000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000002 /* AppDelegate.swift */; };
+		700000000000000000000003 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000003 /* Dish.swift */; };
+		700000000000000000000004 /* FoodDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000004 /* FoodDatabase.swift */; };
+		700000000000000000000005 /* CookingSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000005 /* CookingSchedule.swift */; };
+		700000000000000000000006 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000006 /* NotificationService.swift */; };
+		700000000000000000000007 /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000007 /* TimerService.swift */; };
+		700000000000000000000008 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000008 /* HomeView.swift */; };
+		700000000000000000000009 /* SimpleCookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000009 /* SimpleCookingView.swift */; };
+		70000000000000000000000A /* MultipleCookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000A /* MultipleCookingView.swift */; };
+		70000000000000000000000B /* AddDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000B /* AddDishView.swift */; };
+		70000000000000000000000C /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000C /* SessionView.swift */; };
+		70000000000000000000000D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000D /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		500000000000000000000001 /* TimeCook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		600000000000000000000001 /* TimeCookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCookApp.swift; sourceTree = "<group>"; };
+		600000000000000000000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		600000000000000000000003 /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
+		600000000000000000000004 /* FoodDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDatabase.swift; sourceTree = "<group>"; };
+		600000000000000000000005 /* CookingSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingSchedule.swift; sourceTree = "<group>"; };
+		600000000000000000000006 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		600000000000000000000007 /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
+		600000000000000000000008 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		600000000000000000000009 /* SimpleCookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCookingView.swift; sourceTree = "<group>"; };
+		60000000000000000000000A /* MultipleCookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCookingView.swift; sourceTree = "<group>"; };
+		60000000000000000000000B /* AddDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDishView.swift; sourceTree = "<group>"; };
+		60000000000000000000000C /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		60000000000000000000000D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		60000000000000000000000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		900000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		300000000000000000000001 /* root */ = {
+			isa = PBXGroup;
+			children = (
+				300000000000000000000002 /* TimeCook */,
+				400000000000000000000001 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		300000000000000000000002 /* TimeCook */ = {
+			isa = PBXGroup;
+			children = (
+				600000000000000000000001 /* TimeCookApp.swift */,
+				600000000000000000000002 /* AppDelegate.swift */,
+				800000000000000000000001 /* Models */,
+				800000000000000000000002 /* Services */,
+				800000000000000000000003 /* Views */,
+				60000000000000000000000D /* Assets.xcassets */,
+				60000000000000000000000E /* Info.plist */,
+			);
+			path = TimeCook;
+			sourceTree = "<group>";
+		};
+		400000000000000000000001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				500000000000000000000001 /* TimeCook.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		800000000000000000000001 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				600000000000000000000003 /* Dish.swift */,
+				600000000000000000000004 /* FoodDatabase.swift */,
+				600000000000000000000005 /* CookingSchedule.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		800000000000000000000002 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				600000000000000000000006 /* NotificationService.swift */,
+				600000000000000000000007 /* TimerService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		800000000000000000000003 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				600000000000000000000008 /* HomeView.swift */,
+				600000000000000000000009 /* SimpleCookingView.swift */,
+				60000000000000000000000A /* MultipleCookingView.swift */,
+				60000000000000000000000B /* AddDishView.swift */,
+				60000000000000000000000C /* SessionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		200000000000000000000001 /* TimeCook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A00000000000000000000002 /* Build configuration list for PBXNativeTarget "TimeCook" */;
+			buildPhases = (
+				900000000000000000000003 /* Frameworks */,
+				900000000000000000000001 /* Sources */,
+				900000000000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimeCook;
+			productName = TimeCook;
+			productReference = 500000000000000000000001 /* TimeCook.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		100000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					200000000000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = A00000000000000000000001 /* Build configuration list for PBXProject "TimeCook" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = fr;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				fr,
+				Base,
+				en,
+			);
+			mainGroup = 300000000000000000000001;
+			productRefGroup = 400000000000000000000001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				200000000000000000000001 /* TimeCook */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		900000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70000000000000000000000D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		900000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				700000000000000000000001 /* TimeCookApp.swift in Sources */,
+				700000000000000000000002 /* AppDelegate.swift in Sources */,
+				700000000000000000000003 /* Dish.swift in Sources */,
+				700000000000000000000004 /* FoodDatabase.swift in Sources */,
+				700000000000000000000005 /* CookingSchedule.swift in Sources */,
+				700000000000000000000006 /* NotificationService.swift in Sources */,
+				700000000000000000000007 /* TimerService.swift in Sources */,
+				700000000000000000000008 /* HomeView.swift in Sources */,
+				700000000000000000000009 /* SimpleCookingView.swift in Sources */,
+				70000000000000000000000A /* MultipleCookingView.swift in Sources */,
+				70000000000000000000000B /* AddDishView.swift in Sources */,
+				70000000000000000000000C /* SessionView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B00000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B00000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B00000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TimeCook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timecook.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B00000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TimeCook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.timecook.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A00000000000000000000001 /* Build configuration list for PBXProject "TimeCook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B00000000000000000000001 /* Debug */,
+				B00000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A00000000000000000000002 /* Build configuration list for PBXNativeTarget "TimeCook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B00000000000000000000003 /* Debug */,
+				B00000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 100000000000000000000001 /* Project object */;
+}
