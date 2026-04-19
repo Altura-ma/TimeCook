@@ -20,6 +20,7 @@
 		70000000000000000000000B /* AddDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000B /* AddDishView.swift */; };
 		70000000000000000000000C /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000C /* SessionView.swift */; };
 		70000000000000000000000D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000D /* Assets.xcassets */; };
+		70000000000000000000000F /* CookingParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000F /* CookingParameters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		60000000000000000000000C /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
 		60000000000000000000000D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60000000000000000000000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60000000000000000000000F /* CookingParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingParameters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				600000000000000000000003 /* Dish.swift */,
 				600000000000000000000004 /* FoodDatabase.swift */,
 				600000000000000000000005 /* CookingSchedule.swift */,
+				60000000000000000000000F /* CookingParameters.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				70000000000000000000000A /* MultipleCookingView.swift in Sources */,
 				70000000000000000000000B /* AddDishView.swift in Sources */,
 				70000000000000000000000C /* SessionView.swift in Sources */,
+				70000000000000000000000F /* CookingParameters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

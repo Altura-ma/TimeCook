@@ -58,7 +58,14 @@ struct MultipleCookingView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(dish.name).font(.headline)
-                            Text(dish.formattedTime).font(.subheadline).foregroundColor(.secondary)
+                            HStack(spacing: 6) {
+                                Text(dish.formattedTime)
+                                if let mode = dish.cookingMode {
+                                    Text("·").foregroundColor(.secondary)
+                                    Text(mode)
+                                }
+                            }
+                            .font(.subheadline).foregroundColor(.secondary)
                         }
                         Spacer()
                         Image(systemName: "timer").foregroundColor(.orange)
