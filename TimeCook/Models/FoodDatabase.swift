@@ -22,6 +22,17 @@ enum FoodCategory: String, CaseIterable, Identifiable {
         case .snacks:    return "🍟"
         }
     }
+
+    var colorHex: String {
+        switch self {
+        case .viandes:   return "E8503A"
+        case .poissons:  return "3A8FE8"
+        case .legumes:   return "3ABF6E"
+        case .feculents: return "E8A43A"
+        case .oeufs:     return "E87B3A"
+        case .snacks:    return "9B3AE8"
+        }
+    }
 }
 
 // MARK: - FoodItem

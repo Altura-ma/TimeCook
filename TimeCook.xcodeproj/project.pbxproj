@@ -21,6 +21,11 @@
 		70000000000000000000000C /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000C /* SessionView.swift */; };
 		70000000000000000000000D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000D /* Assets.xcassets */; };
 		70000000000000000000000F /* CookingParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000000000000000000000F /* CookingParameters.swift */; };
+		700000000000000000000010 /* CookingSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000010 /* CookingSessionManager.swift */; };
+		700000000000000000000011 /* TimeCookAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000011 /* TimeCookAttributes.swift */; };
+		700000000000000000000012 /* LiveActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000012 /* LiveActivityService.swift */; };
+		700000000000000000000013 /* FoodGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000013 /* FoodGridView.swift */; };
+		700000000000000000000014 /* DishConfigSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000014 /* DishConfigSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,11 @@
 		60000000000000000000000D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60000000000000000000000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60000000000000000000000F /* CookingParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingParameters.swift; sourceTree = "<group>"; };
+		600000000000000000000010 /* CookingSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingSessionManager.swift; sourceTree = "<group>"; };
+		600000000000000000000011 /* TimeCookAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCookAttributes.swift; sourceTree = "<group>"; };
+		600000000000000000000012 /* LiveActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityService.swift; sourceTree = "<group>"; };
+		600000000000000000000013 /* FoodGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodGridView.swift; sourceTree = "<group>"; };
+		600000000000000000000014 /* DishConfigSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishConfigSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +100,8 @@
 				600000000000000000000004 /* FoodDatabase.swift */,
 				600000000000000000000005 /* CookingSchedule.swift */,
 				60000000000000000000000F /* CookingParameters.swift */,
+				600000000000000000000010 /* CookingSessionManager.swift */,
+				600000000000000000000011 /* TimeCookAttributes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -99,6 +111,7 @@
 			children = (
 				600000000000000000000006 /* NotificationService.swift */,
 				600000000000000000000007 /* TimerService.swift */,
+				600000000000000000000012 /* LiveActivityService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -111,6 +124,8 @@
 				60000000000000000000000A /* MultipleCookingView.swift */,
 				60000000000000000000000B /* AddDishView.swift */,
 				60000000000000000000000C /* SessionView.swift */,
+				600000000000000000000013 /* FoodGridView.swift */,
+				600000000000000000000014 /* DishConfigSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,6 +213,11 @@
 				70000000000000000000000B /* AddDishView.swift in Sources */,
 				70000000000000000000000C /* SessionView.swift in Sources */,
 				70000000000000000000000F /* CookingParameters.swift in Sources */,
+				700000000000000000000010 /* CookingSessionManager.swift in Sources */,
+				700000000000000000000011 /* TimeCookAttributes.swift in Sources */,
+				700000000000000000000012 /* LiveActivityService.swift in Sources */,
+				700000000000000000000013 /* FoodGridView.swift in Sources */,
+				700000000000000000000014 /* DishConfigSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

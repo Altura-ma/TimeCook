@@ -3,9 +3,13 @@ import Foundation
 struct Dish: Identifiable, Codable {
     var id = UUID()
     var name: String
-    var cookingTime: Int  // seconds, pre-computed including all adjustments
+    var cookingTime: Int
     var level: String?
-    var cookingMode: String?  // display string, e.g. "Air Fryer · 180°C · 200 g"
+    var cookingMode: String?
+    var cookingModeType: CookingModeType?
+    var foodItemId: UUID?
+    var lastTemperature: Int?
+    var lastWeight: Int?
 
     var formattedTime: String {
         let m = cookingTime / 60
