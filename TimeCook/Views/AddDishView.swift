@@ -149,7 +149,7 @@ struct AddDishView: View {
                        let maxW = config.maxWeight {
                         Section {
                             HStack {
-                                Label("Poids (portion)", systemImage: "scalemass.fill")
+                                Label("Poids (portion)", systemImage: "scalemass")
                                 Spacer()
                                 Text("\(weight) g")
                                     .foregroundColor(.orange).fontWeight(.semibold)

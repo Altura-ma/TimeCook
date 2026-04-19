@@ -307,6 +307,23 @@ struct SimpleCookingView: View {
 
 // MARK: - Reusable Sub-components
 
+struct FoodChip: View {
+    let label: String
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(label)
+                .font(.subheadline)
+                .padding(.horizontal, 16).padding(.vertical, 10)
+                .background(isSelected ? Color.orange : Color(.secondarySystemBackground))
+                .foregroundColor(isSelected ? .white : .primary)
+                .cornerRadius(20)
+        }
+    }
+}
+
 struct ModeButton: View {
     let mode: CookingModeType
     let isSelected: Bool
