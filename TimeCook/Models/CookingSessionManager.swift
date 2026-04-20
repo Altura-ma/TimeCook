@@ -59,13 +59,21 @@ class CookingSessionManager: ObservableObject {
     @available(iOS 16.2, *)
     private func scheduleLiveActivityUpdates() {
         cancelLiveActivityUpdates()
+        let snapshot = schedule
+
+        // Initial re-render so the first dish (delay ≈ 0) shows as "cooking" right away.
+        let bootTask = Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 800_000_000) // 0.8 s
+            guard !Task.isCancelled else { return }
+            await LiveActivityService.shared.update(schedule: snapshot)
+        }
+        liveActivityTasks.append(bootTask)
 
         for entry in schedule.entries {
             let delay = entry.startTime.timeIntervalSinceNow
             guard delay > 0.5 else { continue }
 
             let dishName = entry.dish.name
-            let snapshot = schedule
 
             let task = Task { @MainActor in
                 try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))

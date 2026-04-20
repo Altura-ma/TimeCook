@@ -123,7 +123,7 @@ struct LockScreenActivityView: View {
                     .foregroundStyle(.white)
                     .lineLimit(2)
                     .minimumScaleFactor(0.7)
-                DishProgressBar(dish: dish, now: now)
+                DishProgressBar(dish: dish)
             } else {
                 Text("Prêt !")
                     .font(.system(size: 26, weight: .bold, design: .rounded))
@@ -158,27 +158,19 @@ struct LockScreenActivityView: View {
 }
 
 // MARK: - Progress bar for current dish
+// Uses ProgressView(timerInterval:) — the only API that self-animates inside Live Activities.
 
 struct DishProgressBar: View {
     let dish: TimeCookAttributes.ContentState.DishStatus
-    let now: Date
-
-    private var fraction: Double {
-        let total = dish.endTime.timeIntervalSince(dish.startTime)
-        guard total > 0 else { return 0 }
-        return min(1, max(0, now.timeIntervalSince(dish.startTime) / total))
-    }
 
     var body: some View {
-        GeometryReader { geo in
-            ZStack(alignment: .leading) {
-                Capsule().fill(Color.white.opacity(0.2)).frame(height: 5)
-                Capsule()
-                    .fill(Color.orange)
-                    .frame(width: geo.size.width * fraction, height: 5)
-            }
+        ProgressView(timerInterval: dish.startTime...dish.endTime, countsDown: false) {
+            EmptyView()
+        } currentValueLabel: {
+            EmptyView()
         }
-        .frame(height: 5)
+        .progressViewStyle(.linear)
+        .tint(.orange)
     }
 }
 
@@ -302,7 +294,7 @@ struct ExpandedBottomView: View {
         VStack(alignment: .leading, spacing: 5) {
             if let dish = currentDish {
                 HStack(spacing: 8) {
-                    DishProgressBar(dish: dish, now: now)
+                    DishProgressBar(dish: dish)
                     Text(dish.name)
                         .font(.caption2)
                         .foregroundStyle(.secondary)
