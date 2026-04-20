@@ -76,14 +76,17 @@ final class LiveActivityService {
     // MARK: - Private
 
     private func makeState(from schedule: CookingSchedule) -> TimeCookAttributes.ContentState {
-        let now = Date()
-        let completed = schedule.entries.filter { $0.startTime <= now }.count
-        let next = schedule.entries.first { $0.startTime > now }
+        let dishes = schedule.entries.map { entry in
+            TimeCookAttributes.ContentState.DishStatus(
+                id: entry.id,
+                name: entry.dish.name,
+                startTime: entry.startTime,
+                endTime: entry.endTime
+            )
+        }
         return TimeCookAttributes.ContentState(
             targetEndTime: schedule.targetEndTime,
-            completedDishes: completed,
-            nextDishName: next?.dish.name,
-            nextDishStartTime: next?.startTime
+            dishes: dishes
         )
     }
 

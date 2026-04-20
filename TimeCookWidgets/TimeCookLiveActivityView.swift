@@ -41,6 +41,15 @@ struct LockScreenActivityView: View {
     let context: ActivityViewContext<TimeCookAttributes>
     @Environment(\.isLuminanceReduced) private var isLuminanceReduced
 
+    private var now: Date { Date() }
+
+    /// Earliest-started dish currently cooking — has the most elapsed progress.
+    private var currentDish: TimeCookAttributes.ContentState.DishStatus? {
+        context.state.dishes
+            .filter { $0.startTime <= now && now < $0.endTime }
+            .min(by: { $0.startTime < $1.startTime })
+    }
+
     var body: some View {
         if isLuminanceReduced {
             alwaysOnView
@@ -49,7 +58,7 @@ struct LockScreenActivityView: View {
         }
     }
 
-    // Always-On / StandBy: essential info only, no animations, no secondary content
+    // Always-On / StandBy: essential info only
     private var alwaysOnView: some View {
         HStack {
             Label("TimeCook", systemImage: "flame.fill")
@@ -66,77 +75,157 @@ struct LockScreenActivityView: View {
 
     private var fullView: some View {
         VStack(alignment: .leading, spacing: 10) {
-            headerRow
-            SessionProgressBar(
-                completed: context.state.completedDishes,
-                total: context.attributes.totalDishes
-            )
-            subtitleRow
-            if let name = context.state.nextDishName,
-               let time = context.state.nextDishStartTime {
-                // Inset container per HIG — don't use a thin Divider + flush content
-                nextDishRow(name: name, time: time)
+            topBar
+            HStack(alignment: .center, spacing: 14) {
+                currentDishPanel
+                Color.white.opacity(0.15)
+                    .frame(width: 1)
+                    .frame(maxHeight: .infinity)
+                dishTimelinePanel
             }
         }
         .padding(16)
     }
 
-    private var headerRow: some View {
-        HStack(alignment: .firstTextBaseline) {
-            Label("TimeCook", systemImage: "flame.fill")
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(.orange)
-                .accessibilityHidden(true)
+    // "● EN COURS" badge  |  countdown timer
+    private var topBar: some View {
+        HStack {
+            HStack(spacing: 5) {
+                Circle().fill(.orange).frame(width: 7, height: 7)
+                Text("EN COURS")
+                    .font(.caption2.weight(.bold))
+                    .foregroundStyle(.orange)
+                    .tracking(0.5)
+                Image(systemName: "rays")
+                    .font(.caption2)
+                    .foregroundStyle(.white.opacity(0.55))
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(.orange.opacity(0.18), in: Capsule())
+
             Spacer()
+
             TimerCountdownView(date: context.state.targetEndTime)
-                .font(.title2.weight(.bold))
+                .font(.system(size: 28, weight: .bold, design: .monospaced))
                 .foregroundStyle(.white)
                 .accessibilityLabel("Temps restant")
         }
     }
 
-    private var subtitleRow: some View {
-        HStack(alignment: .firstTextBaseline) {
-            Text(context.attributes.sessionTitle)
-                .font(.caption)
-                .foregroundStyle(.white.opacity(0.7))
-                .lineLimit(1)
-            Spacer()
-            Group {
-                Text("Prêt à ") +
-                Text(context.state.targetEndTime, style: .time).bold()
+    // Left column: current dish name + orange progress bar
+    @ViewBuilder
+    private var currentDishPanel: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if let dish = currentDish {
+                Text(dish.name)
+                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.7)
+                DishProgressBar(dish: dish, now: now)
+            } else {
+                Text("Prêt !")
+                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .foregroundStyle(.green)
             }
-            .font(.caption)
-            .foregroundStyle(.white.opacity(0.7))
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    // Right column: vertical timeline of all dishes
+    private var dishTimelinePanel: some View {
+        let dishes = context.state.dishes
+        return VStack(alignment: .leading, spacing: 0) {
+            ForEach(Array(dishes.enumerated()), id: \.element.id) { idx, dish in
+                DishTimelineRow(name: dish.name, status: renderStatus(of: dish))
+                if idx < dishes.count - 1 {
+                    Rectangle()
+                        .fill(Color.white.opacity(0.2))
+                        .frame(width: 1.5, height: 5)
+                        .padding(.leading, 6.5)
+                }
+            }
+        }
+        .frame(width: 130, alignment: .leading)
+    }
+
+    private func renderStatus(of dish: TimeCookAttributes.ContentState.DishStatus) -> DishRenderStatus {
+        if now >= dish.endTime { return .done }
+        if now >= dish.startTime { return .cooking }
+        return .waiting
+    }
+}
+
+// MARK: - Progress bar for current dish
+
+struct DishProgressBar: View {
+    let dish: TimeCookAttributes.ContentState.DishStatus
+    let now: Date
+
+    private var fraction: Double {
+        let total = dish.endTime.timeIntervalSince(dish.startTime)
+        guard total > 0 else { return 0 }
+        return min(1, max(0, now.timeIntervalSince(dish.startTime) / total))
+    }
+
+    var body: some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                Capsule().fill(Color.white.opacity(0.2)).frame(height: 5)
+                Capsule()
+                    .fill(Color.orange)
+                    .frame(width: geo.size.width * fraction, height: 5)
+            }
+        }
+        .frame(height: 5)
+    }
+}
+
+// MARK: - Timeline row status
+
+enum DishRenderStatus: Equatable {
+    case done, cooking, waiting
+
+    var iconName: String {
+        switch self {
+        case .done:    "checkmark.circle.fill"
+        case .cooking: "hourglass.fill"
+        case .waiting: "timer"
         }
     }
 
-    // Wrapped in a rounded inset container — HIG: separate blocks with inset shape or thick line
-    @ViewBuilder
-    private func nextDishRow(name: String, time: Date) -> some View {
-        HStack(spacing: 6) {
-            Image(systemName: "bell.fill")
-                .font(.caption)
-                .foregroundStyle(.orange)
-            Text("Lancez **\(name)** dans")
-                .font(.caption)
-                .foregroundStyle(.white)
-                .lineLimit(1)
-            TimerCountdownView(date: time)
-                .font(.caption.weight(.bold))
-                .foregroundStyle(.orange)
-            Spacer()
+    var color: Color {
+        switch self {
+        case .done:    .green
+        case .cooking: .orange
+        case .waiting: Color.white.opacity(0.45)
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
-        .background(Color.white.opacity(0.12), in: RoundedRectangle(cornerRadius: 10))
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("Lancez \(name) bientôt")
+    }
+}
+
+struct DishTimelineRow: View {
+    let name: String
+    let status: DishRenderStatus
+
+    var body: some View {
+        HStack(spacing: 6) {
+            Image(systemName: status.iconName)
+                .font(.system(size: 12, weight: status == .cooking ? .bold : .regular))
+                .foregroundStyle(status.color)
+                .frame(width: 14)
+
+            Text(name)
+                .font(.caption2)
+                .fontWeight(status == .cooking ? .bold : .regular)
+                .foregroundStyle(status == .cooking ? Color.white : Color.white.opacity(0.5))
+                .lineLimit(2)
+                .minimumScaleFactor(0.8)
+        }
     }
 }
 
 // MARK: - Dynamic Island: Compact
-// No manual padding — system positions content snug against the TrueDepth camera (HIG)
 
 struct CompactLeadingView: View {
     var body: some View {
@@ -151,7 +240,6 @@ struct CompactTrailingView: View {
     let endTime: Date
 
     var body: some View {
-        // Single concise value — HIG: compact trailing must never wrap or show multiple lines
         TimerCountdownView(date: endTime)
             .font(.caption.weight(.bold))
             .foregroundStyle(.orange)
@@ -171,8 +259,6 @@ struct MinimalView: View {
 }
 
 // MARK: - Dynamic Island: Expanded
-// No manual padding on leading/trailing — system applies concentric margins (HIG image 2 & 4)
-// Coherent enlargement of compact: 🔥 left / countdown right mirrors compact layout (HIG image 1)
 
 struct ExpandedLeadingView: View {
     var body: some View {
@@ -198,36 +284,41 @@ struct ExpandedTrailingView: View {
 struct ExpandedBottomView: View {
     let context: ActivityViewContext<TimeCookAttributes>
 
-    var body: some View {
-        // System manages bottom region outer margins — no manual horizontal padding on VStack
-        VStack(alignment: .leading, spacing: 5) {
-            HStack(spacing: 8) {
-                SessionProgressBar(
-                    completed: context.state.completedDishes,
-                    total: context.attributes.totalDishes
-                )
-                Text("\(context.state.completedDishes)/\(context.attributes.totalDishes)")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-                    .monospacedDigit()
-            }
-            Text(context.attributes.sessionTitle)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
+    private var now: Date { Date() }
 
-            if let name = context.state.nextDishName,
-               let time = context.state.nextDishStartTime {
-                // Inset capsule container — HIG image 3: when separating blocks in expanded,
-                // use an inset shape (not flush-to-edge content)
+    private var currentDish: TimeCookAttributes.ContentState.DishStatus? {
+        context.state.dishes
+            .filter { $0.startTime <= now && now < $0.endTime }
+            .min(by: { $0.startTime < $1.startTime })
+    }
+
+    private var nextDish: TimeCookAttributes.ContentState.DishStatus? {
+        context.state.dishes
+            .filter { $0.startTime > now }
+            .min(by: { $0.startTime < $1.startTime })
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            if let dish = currentDish {
+                HStack(spacing: 8) {
+                    DishProgressBar(dish: dish, now: now)
+                    Text(dish.name)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+            }
+
+            if let next = nextDish {
                 HStack(spacing: 4) {
                     Image(systemName: "arrow.right.circle.fill")
                         .font(.caption2)
                         .foregroundStyle(.orange)
-                    Text("Lancez \(name) dans")
+                    Text("Lancez \(next.name) dans")
                         .font(.caption2)
                         .lineLimit(1)
-                    TimerCountdownView(date: time)
+                    TimerCountdownView(date: next.startTime)
                         .font(.caption2.weight(.bold))
                         .foregroundStyle(.orange)
                     Spacer()
@@ -236,7 +327,7 @@ struct ExpandedBottomView: View {
                 .padding(.vertical, 5)
                 .background(Color.white.opacity(0.15), in: Capsule())
                 .accessibilityElement(children: .combine)
-                .accessibilityLabel("Lancez \(name) bientôt")
+                .accessibilityLabel("Lancez \(next.name) bientôt")
             }
         }
         .padding(.bottom, 6)
@@ -251,30 +342,6 @@ struct TimerCountdownView: View {
     var body: some View {
         Text(date, style: .timer)
             .monospacedDigit()
-    }
-}
-
-struct SessionProgressBar: View {
-    let completed: Int
-    let total: Int
-
-    private var fraction: Double {
-        guard total > 0 else { return 0 }
-        return min(1.0, Double(completed) / Double(total))
-    }
-
-    var body: some View {
-        GeometryReader { geo in
-            ZStack(alignment: .leading) {
-                Capsule().fill(Color.white.opacity(0.2)).frame(height: 4)
-                Capsule()
-                    .fill(Color.orange)
-                    .frame(width: geo.size.width * fraction, height: 4)
-                    .animation(.easeInOut(duration: 0.4), value: fraction)
-            }
-        }
-        .frame(height: 4)
-        .accessibilityLabel("\(completed) sur \(total) plats en cuisson")
     }
 }
 
