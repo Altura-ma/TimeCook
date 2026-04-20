@@ -1,18 +1,18 @@
 import Foundation
 import ActivityKit
 
-// Shared with TimeCookWidgets extension (duplicated there)
-@available(iOS 16.1, *)
+// NOTE: Duplicated verbatim in TimeCookWidgets/TimeCookAttributes.swift.
+// Widget extensions cannot import the main module — keep both in sync.
 struct TimeCookAttributes: ActivityAttributes {
-    public typealias TimeCookStatus = ContentState
+    // Static — set once at start, never mutated during the session.
+    let sessionTitle: String   // "Steak · Brocoli · Riz"
+    let totalDishes: Int
 
-    public struct ContentState: Codable, Hashable {
-        var targetEndTime: Date         // when all dishes are done
-        var nextDishName: String?       // next dish to start (nil = none)
-        var nextDishStartTime: Date?    // when to start it
-        var totalDishes: Int
-        var sessionTitle: String        // e.g. "Steak · Brocoli · Riz"
+    struct ContentState: Codable, Hashable {
+        var targetEndTime: Date
+        /// Dishes whose startTime has already passed (currently cooking or done).
+        var completedDishes: Int
+        var nextDishName: String?
+        var nextDishStartTime: Date?
     }
-
-    var startedAt: Date
 }
