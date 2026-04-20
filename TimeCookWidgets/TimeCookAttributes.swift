@@ -1,19 +1,15 @@
 import Foundation
 import ActivityKit
 
-// Duplicate of TimeCook/Models/TimeCookAttributes.swift
-// Keep both in sync if you add fields.
-@available(iOS 16.1, *)
+// NOTE: Duplicate of TimeCook/Models/TimeCookAttributes.swift — keep both in sync.
 struct TimeCookAttributes: ActivityAttributes {
-    public typealias TimeCookStatus = ContentState
+    let sessionTitle: String
+    let totalDishes: Int
 
-    public struct ContentState: Codable, Hashable {
+    struct ContentState: Codable, Hashable {
         var targetEndTime: Date
+        var completedDishes: Int
         var nextDishName: String?
         var nextDishStartTime: Date?
-        var totalDishes: Int
-        var sessionTitle: String
     }
-
-    var startedAt: Date
 }
