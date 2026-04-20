@@ -22,7 +22,20 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.driss.timecook</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>timecook</string>
+			</array>
+		</dict>
+	</array>
 	<key>NSSupportsLiveActivities</key>
+	<true/>
+	<key>NSSupportsLiveActivitiesFrequentUpdates</key>
 	<true/>
 	<key>NSUserNotificationUsageDescription</key>
 	<string>TimeCook utilise les notifications pour vous prévenir quand vos plats sont prêts, même lorsque l'écran est verrouillé.</string>

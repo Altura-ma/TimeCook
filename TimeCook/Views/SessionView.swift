@@ -29,17 +29,17 @@ struct SessionView: View {
     private var summaryCard: some View {
         VStack(spacing: 8) {
             Text("Tous les plats prêts à")
-                .font(.subheadline).foregroundColor(.secondary)
+                .font(.subheadline).foregroundStyle(.secondary)
             Text(schedule.targetEndTime, style: .time)
                 .font(.system(size: 48, weight: .bold, design: .rounded))
-                .foregroundColor(.orange)
+                .foregroundStyle(.orange)
 
             if totalRemaining > 0 {
                 Text("Dans \(totalRemaining / 60) min \(totalRemaining % 60) sec")
-                    .font(.subheadline).foregroundColor(.secondary)
+                    .font(.subheadline).foregroundStyle(.secondary)
             } else {
                 Label("Tous les plats sont prêts !", systemImage: "checkmark.circle.fill")
-                    .font(.headline).foregroundColor(.green)
+                    .font(.headline).foregroundStyle(.green)
             }
         }
         .frame(maxWidth: .infinity)
@@ -65,7 +65,7 @@ struct SessionView: View {
     private var stopButton: some View {
         Button(action: onStop) {
             Text("Arrêter la cuisson")
-                .font(.headline).foregroundColor(.red)
+                .font(.headline).foregroundStyle(.red)
                 .frame(maxWidth: .infinity).padding()
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(14)
@@ -103,21 +103,21 @@ struct ScheduleRow: View {
     var body: some View {
         HStack(spacing: 14) {
             Image(systemName: status.icon)
-                .font(.title2).foregroundColor(status.color)
+                .font(.title2).foregroundStyle(status.color)
                 .frame(width: 32)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(entry.dish.name).font(.headline)
 
                 HStack(spacing: 4) {
-                    Text("Démarrage :").font(.caption).foregroundColor(.secondary)
+                    Text("Démarrage :").font(.caption).foregroundStyle(.secondary)
                     Text(entry.startTime, style: .time).font(.caption).fontWeight(.semibold)
                 }
 
                 if status == .cooking {
                     let rem = max(0, Int(entry.endTime.timeIntervalSince(now)))
                     Text("Encore \(rem / 60) min \(rem % 60) sec")
-                        .font(.caption).foregroundColor(.orange)
+                        .font(.caption).foregroundStyle(.orange)
                 }
             }
 
@@ -127,7 +127,7 @@ struct ScheduleRow: View {
                 .font(.caption).fontWeight(.medium)
                 .padding(.horizontal, 10).padding(.vertical, 4)
                 .background(status.color.opacity(0.15))
-                .foregroundColor(status.color)
+                .foregroundStyle(status.color)
                 .cornerRadius(8)
         }
         .padding(14)

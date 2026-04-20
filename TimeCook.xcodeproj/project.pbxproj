@@ -26,6 +26,7 @@
 		700000000000000000000012 /* LiveActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000012 /* LiveActivityService.swift */; };
 		700000000000000000000013 /* FoodGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000013 /* FoodGridView.swift */; };
 		700000000000000000000014 /* DishConfigSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000014 /* DishConfigSheet.swift */; };
+		700000000000000000000015 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 600000000000000000000015 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		60000000000000000000000C /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
 		60000000000000000000000D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60000000000000000000000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		600000000000000000000015 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		60000000000000000000000F /* CookingParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingParameters.swift; sourceTree = "<group>"; };
 		600000000000000000000010 /* CookingSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingSessionManager.swift; sourceTree = "<group>"; };
 		600000000000000000000011 /* TimeCookAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCookAttributes.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				800000000000000000000003 /* Views */,
 				60000000000000000000000D /* Assets.xcassets */,
 				60000000000000000000000E /* Info.plist */,
+				600000000000000000000015 /* PrivacyInfo.xcprivacy */,
 			);
 			path = TimeCook;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70000000000000000000000D /* Assets.xcassets in Resources */,
+				700000000000000000000015 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

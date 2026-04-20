@@ -9,6 +9,13 @@ struct TimeCookApp: App {
         WindowGroup {
             HomeView()
                 .environmentObject(sessionManager)
+                .onAppear {
+                    if #available(iOS 16.2, *) {
+                        Task { @MainActor in
+                            LiveActivityService.shared.restoreIfNeeded()
+                        }
+                    }
+                }
         }
     }
 }
