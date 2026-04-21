@@ -36,6 +36,7 @@ struct TimeCookLiveActivity: Widget {
 }
 
 // MARK: - Lock Screen / Notification Banner
+// Spec: 408×84–160 pt (430-wide device). Content height = total − 32 (16 pt padding each side).
 
 struct LockScreenActivityView: View {
     let context: ActivityViewContext<TimeCookAttributes>
@@ -43,7 +44,7 @@ struct LockScreenActivityView: View {
 
     private var now: Date { Date() }
 
-    /// Earliest-started dish currently cooking — has the most elapsed progress.
+    /// Earliest-started dish currently cooking → most elapsed progress fraction.
     private var currentDish: TimeCookAttributes.ContentState.DishStatus? {
         context.state.dishes
             .filter { $0.startTime <= now && now < $0.endTime }
@@ -58,7 +59,7 @@ struct LockScreenActivityView: View {
         }
     }
 
-    // Always-On / StandBy: essential info only
+    // Always-On / StandBy: no animation, essential info only (spec §6)
     private var alwaysOnView: some View {
         HStack {
             Label("TimeCook", systemImage: "flame.fill")
@@ -66,7 +67,7 @@ struct LockScreenActivityView: View {
                 .foregroundStyle(.orange)
             Spacer()
             TimerCountdownView(date: context.state.targetEndTime)
-                .font(.title2.weight(.bold))
+                .font(.title3.weight(.bold))
                 .foregroundStyle(.white)
         }
         .padding(16)
@@ -74,103 +75,104 @@ struct LockScreenActivityView: View {
     }
 
     private var fullView: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            topBar
-            HStack(alignment: .center, spacing: 14) {
+        HStack(alignment: .top, spacing: 12) {
+            // Left: badge + dish name + progress
+            VStack(alignment: .leading, spacing: 6) {
+                statusBadge
                 currentDishPanel
-                Color.white.opacity(0.15)
-                    .frame(width: 1)
-                    .frame(maxHeight: .infinity)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            // Right: countdown + dish timeline
+            VStack(alignment: .trailing, spacing: 6) {
+                TimerCountdownView(date: context.state.targetEndTime)
+                    .font(.title2.monospacedDigit().weight(.bold))
+                    .foregroundStyle(.white)
+                    .accessibilityLabel("Temps restant")
                 dishTimelinePanel
             }
+            .frame(width: 120, alignment: .trailing)
         }
         .padding(16)
     }
 
-    // "● EN COURS" badge  |  countdown timer
-    private var topBar: some View {
-        HStack {
-            HStack(spacing: 5) {
-                Circle().fill(.orange).frame(width: 7, height: 7)
-                Text("EN COURS")
-                    .font(.caption2.weight(.bold))
-                    .foregroundStyle(.orange)
-                    .tracking(0.5)
-                Image(systemName: "rays")
-                    .font(.caption2)
-                    .foregroundStyle(.white.opacity(0.55))
-            }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(.orange.opacity(0.18), in: Capsule())
-
-            Spacer()
-
-            TimerCountdownView(date: context.state.targetEndTime)
-                .font(.system(size: 28, weight: .bold, design: .monospaced))
-                .foregroundStyle(.white)
-                .accessibilityLabel("Temps restant")
+    // "● EN COURS  ✦"
+    private var statusBadge: some View {
+        HStack(spacing: 4) {
+            Circle().fill(.orange).frame(width: 6, height: 6)
+            Text("EN COURS")
+                .font(.caption2.weight(.bold))
+                .foregroundStyle(.orange)
+                .tracking(0.5)
+            Image(systemName: "rays")
+                .font(.system(size: 9))
+                .foregroundStyle(.white.opacity(0.5))
         }
+        .padding(.horizontal, 7)
+        .padding(.vertical, 3)
+        .background(.orange.opacity(0.18), in: Capsule())
     }
 
-    // Left column: current dish name + orange progress bar
+    // Dish name (large) + animated progress bar
     @ViewBuilder
     private var currentDishPanel: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if let dish = currentDish {
+        if let dish = currentDish {
+            VStack(alignment: .leading, spacing: 5) {
                 Text(dish.name)
-                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .font(.system(size: 22, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.7)
-                DishProgressBar(dish: dish)
-            } else {
-                Text("Prêt !")
-                    .font(.system(size: 26, weight: .bold, design: .rounded))
-                    .foregroundStyle(.green)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+                // ProgressView(timerInterval:) self-animates in Live Activities — no app update needed.
+                ProgressView(timerInterval: dish.startTime...dish.endTime, countsDown: false) {
+                    EmptyView()
+                } currentValueLabel: {
+                    EmptyView()
+                }
+                .progressViewStyle(.linear)
+                .tint(.orange)
             }
+        } else {
+            Label("Tous les plats prêts !", systemImage: "checkmark.circle.fill")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.green)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    // Right column: vertical timeline of all dishes
+    // Vertical dish timeline aligned to the right
+    @ViewBuilder
     private var dishTimelinePanel: some View {
         let dishes = context.state.dishes
-        return VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .trailing, spacing: 0) {
             ForEach(Array(dishes.enumerated()), id: \.element.id) { idx, dish in
-                DishTimelineRow(name: dish.name, status: renderStatus(of: dish))
+                let status = renderStatus(of: dish)
+                HStack(spacing: 4) {
+                    Text(dish.name)
+                        .font(.caption2)
+                        .fontWeight(status == .cooking ? .semibold : .regular)
+                        .foregroundStyle(status == .cooking ? Color.white : Color.white.opacity(0.45))
+                        .lineLimit(2)
+                        .multilineTextAlignment(.trailing)
+                    Image(systemName: status.iconName)
+                        .font(.system(size: 11, weight: status == .cooking ? .bold : .regular))
+                        .foregroundStyle(status.color)
+                        .frame(width: 12)
+                }
                 if idx < dishes.count - 1 {
                     Rectangle()
                         .fill(Color.white.opacity(0.2))
-                        .frame(width: 1.5, height: 5)
-                        .padding(.leading, 6.5)
+                        .frame(width: 1, height: 5)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.trailing, 5.5)
                 }
             }
         }
-        .frame(width: 130, alignment: .leading)
     }
 
     private func renderStatus(of dish: TimeCookAttributes.ContentState.DishStatus) -> DishRenderStatus {
         if now >= dish.endTime { return .done }
         if now >= dish.startTime { return .cooking }
         return .waiting
-    }
-}
-
-// MARK: - Progress bar for current dish
-// Uses ProgressView(timerInterval:) — the only API that self-animates inside Live Activities.
-
-struct DishProgressBar: View {
-    let dish: TimeCookAttributes.ContentState.DishStatus
-
-    var body: some View {
-        ProgressView(timerInterval: dish.startTime...dish.endTime, countsDown: false) {
-            EmptyView()
-        } currentValueLabel: {
-            EmptyView()
-        }
-        .progressViewStyle(.linear)
-        .tint(.orange)
     }
 }
 
@@ -191,33 +193,13 @@ enum DishRenderStatus: Equatable {
         switch self {
         case .done:    .green
         case .cooking: .orange
-        case .waiting: Color.white.opacity(0.45)
-        }
-    }
-}
-
-struct DishTimelineRow: View {
-    let name: String
-    let status: DishRenderStatus
-
-    var body: some View {
-        HStack(spacing: 6) {
-            Image(systemName: status.iconName)
-                .font(.system(size: 12, weight: status == .cooking ? .bold : .regular))
-                .foregroundStyle(status.color)
-                .frame(width: 14)
-
-            Text(name)
-                .font(.caption2)
-                .fontWeight(status == .cooking ? .bold : .regular)
-                .foregroundStyle(status == .cooking ? Color.white : Color.white.opacity(0.5))
-                .lineLimit(2)
-                .minimumScaleFactor(0.8)
+        case .waiting: Color.white.opacity(0.4)
         }
     }
 }
 
 // MARK: - Dynamic Island: Compact
+// Spec: 62.33×36.67 pt (430-wide) / 52.33×36.67 pt (393-wide). No manual padding.
 
 struct CompactLeadingView: View {
     var body: some View {
@@ -240,17 +222,19 @@ struct CompactTrailingView: View {
 }
 
 // MARK: - Dynamic Island: Minimal
+// Spec: 36.67–45×36.67 pt. One meaningful symbol only.
 
 struct MinimalView: View {
     var body: some View {
         Image(systemName: "flame.fill")
-            .font(.system(size: 12))
+            .font(.system(size: 11))
             .foregroundStyle(.orange)
             .accessibilityLabel("TimeCook actif")
     }
 }
 
 // MARK: - Dynamic Island: Expanded
+// Spec: 408×84–160 pt (430-wide). Leading/trailing: no manual horizontal padding (system provides concentric margins).
 
 struct ExpandedLeadingView: View {
     var body: some View {
@@ -294,7 +278,14 @@ struct ExpandedBottomView: View {
         VStack(alignment: .leading, spacing: 5) {
             if let dish = currentDish {
                 HStack(spacing: 8) {
-                    DishProgressBar(dish: dish)
+                    ProgressView(timerInterval: dish.startTime...dish.endTime, countsDown: false) {
+                        EmptyView()
+                    } currentValueLabel: {
+                        EmptyView()
+                    }
+                    .progressViewStyle(.linear)
+                    .tint(.orange)
+
                     Text(dish.name)
                         .font(.caption2)
                         .foregroundStyle(.secondary)
@@ -341,4 +332,56 @@ struct TimerCountdownView: View {
 
 private extension Color {
     static let tcBackground = Color(red: 0.10, green: 0.07, blue: 0.04)
+}
+
+// MARK: - Previews (Xcode Canvas — all 4 presentation types)
+
+private let previewAttributes = TimeCookAttributes(
+    sessionTitle: "Steak · Frites · Œuf",
+    totalDishes: 3
+)
+
+private func previewState(minutesRemaining: Double, dishesStarted: Int) -> TimeCookAttributes.ContentState {
+    let end = Date().addingTimeInterval(minutesRemaining * 60)
+    return TimeCookAttributes.ContentState(
+        targetEndTime: end,
+        dishes: [
+            .init(id: UUID(), name: "Steak",
+                  startTime: dishesStarted >= 1 ? Date().addingTimeInterval(-5 * 60) : end.addingTimeInterval(-10 * 60),
+                  endTime: end),
+            .init(id: UUID(), name: "Frites",
+                  startTime: dishesStarted >= 2 ? Date().addingTimeInterval(-1 * 60) : end.addingTimeInterval(-5 * 60),
+                  endTime: end),
+            .init(id: UUID(), name: "Œuf à la coque",
+                  startTime: dishesStarted >= 3 ? Date().addingTimeInterval(-0.5 * 60) : end.addingTimeInterval(-3 * 60),
+                  endTime: end),
+        ]
+    )
+}
+
+#Preview("Lock Screen — 1 plat en cuisson", as: .content, using: previewAttributes) {
+    TimeCookLiveActivity()
+} contentStates: {
+    previewState(minutesRemaining: 10, dishesStarted: 1)
+    previewState(minutesRemaining: 5, dishesStarted: 2)
+    previewState(minutesRemaining: 3, dishesStarted: 3)
+}
+
+#Preview("Compact", as: .dynamicIsland(.compact), using: previewAttributes) {
+    TimeCookLiveActivity()
+} contentStates: {
+    previewState(minutesRemaining: 10, dishesStarted: 1)
+}
+
+#Preview("Expanded", as: .dynamicIsland(.expanded), using: previewAttributes) {
+    TimeCookLiveActivity()
+} contentStates: {
+    previewState(minutesRemaining: 10, dishesStarted: 1)
+    previewState(minutesRemaining: 5, dishesStarted: 2)
+}
+
+#Preview("Minimal", as: .dynamicIsland(.minimal), using: previewAttributes) {
+    TimeCookLiveActivity()
+} contentStates: {
+    previewState(minutesRemaining: 10, dishesStarted: 1)
 }
