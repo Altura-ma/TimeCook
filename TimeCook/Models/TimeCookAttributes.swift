@@ -14,10 +14,10 @@ struct TimeCookAttributes: ActivityAttributes {
         struct DishStatus: Codable, Hashable, Identifiable {
             var id: UUID
             var name: String
-            /// Absolute time when this dish should start cooking.
             var startTime: Date
-            /// Absolute time when this dish finishes (== targetEndTime for all dishes).
             var endTime: Date
+            /// Set by the app at push time — avoids hash collisions when only the clock advances.
+            var isCooking: Bool
         }
     }
 }

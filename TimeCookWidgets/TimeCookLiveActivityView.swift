@@ -36,18 +36,16 @@ struct TimeCookLiveActivity: Widget {
 }
 
 // MARK: - Lock Screen / Notification Banner
-// Spec: 408×84–160 pt (430-wide device). Content height = total − 32 (16 pt padding each side).
+// Spec: 408×84–160 pt (430-wide device).
 
 struct LockScreenActivityView: View {
     let context: ActivityViewContext<TimeCookAttributes>
     @Environment(\.isLuminanceReduced) private var isLuminanceReduced
 
-    private var now: Date { Date() }
-
-    /// Earliest-started dish currently cooking → most elapsed progress fraction.
+    /// Earliest-started cooking dish → most elapsed progress fraction.
     private var currentDish: TimeCookAttributes.ContentState.DishStatus? {
         context.state.dishes
-            .filter { $0.startTime <= now && now < $0.endTime }
+            .filter { $0.isCooking }
             .min(by: { $0.startTime < $1.startTime })
     }
 
@@ -59,7 +57,7 @@ struct LockScreenActivityView: View {
         }
     }
 
-    // Always-On / StandBy: no animation, essential info only (spec §6)
+    // Always-On / StandBy: no animation (spec §6)
     private var alwaysOnView: some View {
         HStack {
             Label("TimeCook", systemImage: "flame.fill")
@@ -76,14 +74,12 @@ struct LockScreenActivityView: View {
 
     private var fullView: some View {
         HStack(alignment: .top, spacing: 12) {
-            // Left: badge + dish name + progress
             VStack(alignment: .leading, spacing: 6) {
                 statusBadge
                 currentDishPanel
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            // Right: countdown + dish timeline
             VStack(alignment: .trailing, spacing: 6) {
                 TimerCountdownView(date: context.state.targetEndTime)
                     .font(.title2.monospacedDigit().weight(.bold))
@@ -96,7 +92,6 @@ struct LockScreenActivityView: View {
         .padding(16)
     }
 
-    // "● EN COURS  ✦"
     private var statusBadge: some View {
         HStack(spacing: 4) {
             Circle().fill(.orange).frame(width: 6, height: 6)
@@ -113,7 +108,6 @@ struct LockScreenActivityView: View {
         .background(.orange.opacity(0.18), in: Capsule())
     }
 
-    // Dish name (large) + animated progress bar
     @ViewBuilder
     private var currentDishPanel: some View {
         if let dish = currentDish {
@@ -123,14 +117,11 @@ struct LockScreenActivityView: View {
                     .foregroundStyle(.white)
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
-                // ProgressView(timerInterval:) self-animates in Live Activities — no app update needed.
-                ProgressView(timerInterval: dish.startTime...dish.endTime, countsDown: false) {
-                    EmptyView()
-                } currentValueLabel: {
-                    EmptyView()
-                }
-                .progressViewStyle(.linear)
-                .tint(.orange)
+                // .labelsHidden() removes the extra label lines that ProgressView renders by default.
+                ProgressView(timerInterval: dish.startTime...dish.endTime, countsDown: false)
+                    .progressViewStyle(.linear)
+                    .tint(.orange)
+                    .labelsHidden()
             }
         } else {
             Label("Tous les plats prêts !", systemImage: "checkmark.circle.fill")
@@ -139,7 +130,6 @@ struct LockScreenActivityView: View {
         }
     }
 
-    // Vertical dish timeline aligned to the right
     @ViewBuilder
     private var dishTimelinePanel: some View {
         let dishes = context.state.dishes
@@ -170,9 +160,11 @@ struct LockScreenActivityView: View {
     }
 
     private func renderStatus(of dish: TimeCookAttributes.ContentState.DishStatus) -> DishRenderStatus {
-        if now >= dish.endTime { return .done }
-        if now >= dish.startTime { return .cooking }
-        return .waiting
+        // Use isCooking set by the app — reliable, not subject to render-time clock drift.
+        if dish.isCooking { return .cooking }
+        let allDone = context.state.dishes.allSatisfy { !$0.isCooking }
+            && Date() >= context.state.targetEndTime
+        return allDone ? .done : .waiting
     }
 }
 
@@ -199,7 +191,7 @@ enum DishRenderStatus: Equatable {
 }
 
 // MARK: - Dynamic Island: Compact
-// Spec: 62.33×36.67 pt (430-wide) / 52.33×36.67 pt (393-wide). No manual padding.
+// Spec: 62.33×36.67 pt (430-wide). No manual padding.
 
 struct CompactLeadingView: View {
     var body: some View {
@@ -222,7 +214,7 @@ struct CompactTrailingView: View {
 }
 
 // MARK: - Dynamic Island: Minimal
-// Spec: 36.67–45×36.67 pt. One meaningful symbol only.
+// Spec: 36.67–45×36.67 pt.
 
 struct MinimalView: View {
     var body: some View {
@@ -234,7 +226,6 @@ struct MinimalView: View {
 }
 
 // MARK: - Dynamic Island: Expanded
-// Spec: 408×84–160 pt (430-wide). Leading/trailing: no manual horizontal padding (system provides concentric margins).
 
 struct ExpandedLeadingView: View {
     var body: some View {
@@ -260,17 +251,15 @@ struct ExpandedTrailingView: View {
 struct ExpandedBottomView: View {
     let context: ActivityViewContext<TimeCookAttributes>
 
-    private var now: Date { Date() }
-
     private var currentDish: TimeCookAttributes.ContentState.DishStatus? {
         context.state.dishes
-            .filter { $0.startTime <= now && now < $0.endTime }
+            .filter { $0.isCooking }
             .min(by: { $0.startTime < $1.startTime })
     }
 
     private var nextDish: TimeCookAttributes.ContentState.DishStatus? {
         context.state.dishes
-            .filter { $0.startTime > now }
+            .filter { !$0.isCooking }
             .min(by: { $0.startTime < $1.startTime })
     }
 
@@ -278,14 +267,10 @@ struct ExpandedBottomView: View {
         VStack(alignment: .leading, spacing: 5) {
             if let dish = currentDish {
                 HStack(spacing: 8) {
-                    ProgressView(timerInterval: dish.startTime...dish.endTime, countsDown: false) {
-                        EmptyView()
-                    } currentValueLabel: {
-                        EmptyView()
-                    }
-                    .progressViewStyle(.linear)
-                    .tint(.orange)
-
+                    ProgressView(timerInterval: dish.startTime...dish.endTime, countsDown: false)
+                        .progressViewStyle(.linear)
+                        .tint(.orange)
+                        .labelsHidden()
                     Text(dish.name)
                         .font(.caption2)
                         .foregroundStyle(.secondary)
@@ -337,7 +322,7 @@ private extension Color {
 // MARK: - Previews (Xcode Canvas — all 4 presentation types)
 
 private let previewAttributes = TimeCookAttributes(
-    sessionTitle: "Steak · Frites · Œuf",
+    sessionTitle: "Bacon · Agneau · Boulgour",
     totalDishes: 3
 )
 
@@ -346,42 +331,45 @@ private func previewState(minutesRemaining: Double, dishesStarted: Int) -> TimeC
     return TimeCookAttributes.ContentState(
         targetEndTime: end,
         dishes: [
-            .init(id: UUID(), name: "Steak",
-                  startTime: dishesStarted >= 1 ? Date().addingTimeInterval(-5 * 60) : end.addingTimeInterval(-10 * 60),
-                  endTime: end),
-            .init(id: UUID(), name: "Frites",
-                  startTime: dishesStarted >= 2 ? Date().addingTimeInterval(-1 * 60) : end.addingTimeInterval(-5 * 60),
-                  endTime: end),
-            .init(id: UUID(), name: "Œuf à la coque",
-                  startTime: dishesStarted >= 3 ? Date().addingTimeInterval(-0.5 * 60) : end.addingTimeInterval(-3 * 60),
-                  endTime: end),
+            .init(id: UUID(), name: "Bacon",
+                  startTime: Date().addingTimeInterval(-5 * 60),
+                  endTime: end,
+                  isCooking: dishesStarted >= 1),
+            .init(id: UUID(), name: "Agneau (côtelettes)",
+                  startTime: dishesStarted >= 2 ? Date().addingTimeInterval(-60) : end.addingTimeInterval(-4 * 60),
+                  endTime: end,
+                  isCooking: dishesStarted >= 2),
+            .init(id: UUID(), name: "Boulgour",
+                  startTime: dishesStarted >= 3 ? Date().addingTimeInterval(-30) : end.addingTimeInterval(-3 * 60),
+                  endTime: end,
+                  isCooking: dishesStarted >= 3),
         ]
     )
 }
 
-#Preview("Lock Screen — 1 plat en cuisson", as: .content, using: previewAttributes) {
+#Preview("Lock Screen — 1 plat", as: .content, using: previewAttributes) {
     TimeCookLiveActivity()
 } contentStates: {
-    previewState(minutesRemaining: 10, dishesStarted: 1)
-    previewState(minutesRemaining: 5, dishesStarted: 2)
+    previewState(minutesRemaining: 5, dishesStarted: 1)
+    previewState(minutesRemaining: 4, dishesStarted: 2)
     previewState(minutesRemaining: 3, dishesStarted: 3)
 }
 
 #Preview("Compact", as: .dynamicIsland(.compact), using: previewAttributes) {
     TimeCookLiveActivity()
 } contentStates: {
-    previewState(minutesRemaining: 10, dishesStarted: 1)
+    previewState(minutesRemaining: 5, dishesStarted: 1)
 }
 
 #Preview("Expanded", as: .dynamicIsland(.expanded), using: previewAttributes) {
     TimeCookLiveActivity()
 } contentStates: {
-    previewState(minutesRemaining: 10, dishesStarted: 1)
-    previewState(minutesRemaining: 5, dishesStarted: 2)
+    previewState(minutesRemaining: 5, dishesStarted: 1)
+    previewState(minutesRemaining: 4, dishesStarted: 2)
 }
 
 #Preview("Minimal", as: .dynamicIsland(.minimal), using: previewAttributes) {
     TimeCookLiveActivity()
 } contentStates: {
-    previewState(minutesRemaining: 10, dishesStarted: 1)
+    previewState(minutesRemaining: 5, dishesStarted: 1)
 }
