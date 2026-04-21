@@ -66,152 +66,15 @@ struct DishConfigSheet: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-
-                    // ── Header ────────────────────────────────────
-                    HStack(spacing: 14) {
-                        Text(food.category.icon)
-                            .font(.system(size: 44))
-                            .frame(width: 72, height: 72)
-                            .background(Color(hex: food.category.colorHex).opacity(0.15))
-                            .cornerRadius(18)
-
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(food.name)
-                                .font(.title2).fontWeight(.bold)
-                            Text(food.category.rawValue)
-                                .font(.subheadline).foregroundColor(.secondary)
-                        }
-                        Spacer()
-                    }
-                    .padding(.horizontal)
-
-                    // ── Dish name ─────────────────────────────────
-                    VStack(alignment: .leading, spacing: 6) {
-                        Label("Nom du plat", systemImage: "pencil")
-                            .font(.headline).padding(.horizontal)
-                        TextField("Ex : Mon steak, Légumes du soir…", text: $dishName)
-                            .padding(12)
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(12)
-                            .padding(.horizontal)
-                    }
-
+                    headerSection
+                    dishNameSection
                     Divider().padding(.horizontal)
-
-                    // ── Mode selection ────────────────────────────
-                    VStack(alignment: .leading, spacing: 10) {
-                        Label("Mode de cuisson", systemImage: "flame").font(.headline)
-                            .padding(.horizontal)
-                        LazyVGrid(
-                            columns: [GridItem(.adaptive(minimum: 90, maximum: 120))],
-                            spacing: 10
-                        ) {
-                            ForEach(food.availableModes) { mode in
-                                ModeButton(
-                                    mode: mode,
-                                    isSelected: selectedMode == mode
-                                ) { pickMode(mode) }
-                            }
-                        }
-                        .padding(.horizontal)
-                    }
-
-                    // ── Level selection ───────────────────────────
-                    if let config = currentConfig, let levels = config.levels {
-                        Divider().padding(.horizontal)
-                        VStack(alignment: .leading, spacing: 10) {
-                            Label("Niveau de cuisson", systemImage: "thermometer.medium")
-                                .font(.headline).padding(.horizontal)
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 10) {
-                                    ForEach(levels) { level in
-                                        ConfigChip(
-                                            label: level.name,
-                                            isSelected: selectedLevel?.id == level.id
-                                        ) { selectedLevel = level }
-                                    }
-                                }
-                                .padding(.horizontal)
-                            }
-                        }
-                    }
-
-                    // ── Temperature ───────────────────────────────
-                    if let config = currentConfig,
-                       config.defaultTemp != nil,
-                       let minT = config.minTemp, let maxT = config.maxTemp {
-                        Divider().padding(.horizontal)
-                        VStack(alignment: .leading, spacing: 10) {
-                            Label("Température", systemImage: "thermometer.sun.fill")
-                                .font(.headline).padding(.horizontal)
-                            ConfigParamRow(
-                                value: "\(temperature) °C",
-                                hint: "\(minT)–\(maxT) °C • ajuste le temps"
-                            ) {
-                                Stepper("", value: $temperature, in: minT...maxT, step: 10)
-                                    .labelsHidden()
-                            }
-                            .padding(.horizontal)
-                        }
-                    }
-
-                    // ── Weight ─────────────────────────────────────
-                    if let config = currentConfig,
-                       config.supportsWeight,
-                       let minW = config.minWeight, let maxW = config.maxWeight {
-                        Divider().padding(.horizontal)
-                        VStack(alignment: .leading, spacing: 10) {
-                            Label("Poids (portion)", systemImage: "scalemass")
-                                .font(.headline).padding(.horizontal)
-                            ConfigParamRow(
-                                value: "\(weight) g",
-                                hint: "\(minW)–\(maxW) g • ajuste le temps"
-                            ) {
-                                Stepper("", value: $weight,
-                                        in: minW...maxW, step: currentConfig?.weightStep ?? 50)
-                                    .labelsHidden()
-                            }
-                            .padding(.horizontal)
-                        }
-                    }
-
-                    // ── Time preview ──────────────────────────────
-                    if let seconds = computedTime {
-                        Divider().padding(.horizontal)
-                        HStack {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("Durée estimée").font(.subheadline).foregroundColor(.secondary)
-                                if let config = currentConfig {
-                                    let s = config.parameterSummary(temp: temperature, weight: weight)
-                                    if !s.isEmpty {
-                                        Text(s).font(.caption).foregroundColor(.secondary)
-                                    }
-                                }
-                            }
-                            Spacer()
-                            Text(formatDuration(seconds))
-                                .font(.system(size: 28, weight: .bold, design: .rounded))
-                                .foregroundColor(.orange)
-                        }
-                        .padding(.horizontal)
-                    }
-
-                    // ── Action buttons ────────────────────────────
-                    VStack(spacing: 10) {
-                        Button(action: confirm) {
-                            Label(confirmLabel, systemImage: confirmIcon)
-                                .font(.headline).foregroundColor(.white)
-                                .frame(maxWidth: .infinity).padding()
-                                .background(canConfirm ? Color.orange : Color.gray)
-                                .cornerRadius(14)
-                        }
-                        .disabled(!canConfirm)
-
-                        Button("Annuler") { dismiss() }
-                            .font(.subheadline).foregroundColor(.secondary)
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom, 20)
+                    modeSection
+                    levelSection
+                    temperatureSection
+                    weightSection
+                    timePreviewSection
+                    actionSection
                 }
                 .padding(.top)
             }
@@ -219,6 +82,128 @@ struct DishConfigSheet: View {
             .navigationBarHidden(true)
         }
         .onAppear { prepopulate() }
+    }
+
+    private var headerSection: some View {
+        HStack(spacing: 14) {
+            Text(food.category.icon)
+                .font(.system(size: 44))
+                .frame(width: 72, height: 72)
+                .background(Color(hex: food.category.colorHex).opacity(0.15))
+                .cornerRadius(18)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(food.name).font(.title2).fontWeight(.bold)
+                Text(food.category.rawValue).font(.subheadline).foregroundColor(.secondary)
+            }
+            Spacer()
+        }
+        .padding(.horizontal)
+    }
+
+    private var dishNameSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Label("Nom du plat", systemImage: "pencil").font(.headline).padding(.horizontal)
+            TextField("Ex : Mon steak, Légumes du soir…", text: $dishName)
+                .padding(12)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(12)
+                .padding(.horizontal)
+        }
+    }
+
+    private var modeSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Label("Mode de cuisson", systemImage: "flame").font(.headline).padding(.horizontal)
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 90, maximum: 120))], spacing: 10) {
+                ForEach(food.availableModes) { mode in
+                    ModeButton(mode: mode, isSelected: selectedMode == mode) { pickMode(mode) }
+                }
+            }
+            .padding(.horizontal)
+        }
+    }
+
+    @ViewBuilder
+    private var levelSection: some View {
+        if let config = currentConfig, let levels = config.levels {
+            Divider().padding(.horizontal)
+            VStack(alignment: .leading, spacing: 10) {
+                Label("Niveau de cuisson", systemImage: "thermometer.medium").font(.headline).padding(.horizontal)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        ForEach(levels) { level in
+                            ConfigChip(label: level.name, isSelected: selectedLevel?.id == level.id) { selectedLevel = level }
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var temperatureSection: some View {
+        if let config = currentConfig, config.defaultTemp != nil, let minT = config.minTemp, let maxT = config.maxTemp {
+            Divider().padding(.horizontal)
+            VStack(alignment: .leading, spacing: 10) {
+                Label("Température", systemImage: "thermometer.sun.fill").font(.headline).padding(.horizontal)
+                ConfigParamRow(value: "\(temperature) °C", hint: "\(minT)–\(maxT) °C • ajuste le temps") {
+                    Stepper("", value: $temperature, in: minT...maxT, step: 10).labelsHidden()
+                }
+                .padding(.horizontal)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var weightSection: some View {
+        if let config = currentConfig, config.supportsWeight, let minW = config.minWeight, let maxW = config.maxWeight {
+            Divider().padding(.horizontal)
+            VStack(alignment: .leading, spacing: 10) {
+                Label("Poids (portion)", systemImage: "scalemass").font(.headline).padding(.horizontal)
+                ConfigParamRow(value: "\(weight) g", hint: "\(minW)–\(maxW) g • ajuste le temps") {
+                    Stepper("", value: $weight, in: minW...maxW, step: currentConfig?.weightStep ?? 50).labelsHidden()
+                }
+                .padding(.horizontal)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var timePreviewSection: some View {
+        if let seconds = computedTime {
+            Divider().padding(.horizontal)
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Durée estimée").font(.subheadline).foregroundColor(.secondary)
+                    if let config = currentConfig {
+                        let s = config.parameterSummary(temp: temperature, weight: weight)
+                        if !s.isEmpty {
+                            Text(s).font(.caption).foregroundColor(.secondary)
+                        }
+                    }
+                }
+                Spacer()
+                Text(formatDuration(seconds)).font(.system(size: 28, weight: .bold, design: .rounded)).foregroundColor(.orange)
+            }
+            .padding(.horizontal)
+        }
+    }
+
+    private var actionSection: some View {
+        VStack(spacing: 10) {
+            Button(action: confirm) {
+                Label(confirmLabel, systemImage: confirmIcon)
+                    .font(.headline).foregroundColor(.white)
+                    .frame(maxWidth: .infinity).padding()
+                    .background(canConfirm ? Color.orange : Color.gray)
+                    .cornerRadius(14)
+            }
+            .disabled(!canConfirm)
+            Button("Annuler") { dismiss() }.font(.subheadline).foregroundColor(.secondary)
+        }
+        .padding(.horizontal)
+        .padding(.bottom, 20)
     }
 
     // MARK: - Logic
@@ -312,6 +297,24 @@ struct ConfigParamRow<Control: View>: View {
         .padding(14)
         .background(Color(.secondarySystemBackground))
         .cornerRadius(12)
+    }
+}
+
+struct ModeButton: View {
+    let mode: CookingModeType
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(mode.rawValue)
+                .font(.subheadline).fontWeight(.medium)
+                .padding(.horizontal, 12).padding(.vertical, 10)
+                .frame(maxWidth: .infinity)
+                .background(isSelected ? Color.orange : Color(.secondarySystemBackground))
+                .foregroundColor(isSelected ? .white : .primary)
+                .cornerRadius(10)
+        }
     }
 }
 
