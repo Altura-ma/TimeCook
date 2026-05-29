@@ -63,16 +63,16 @@
 		389694F131B658871E76EF97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		395982C14F9486FD0072BB09 /* TimeCookLiveActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCookLiveActivityWidget.swift; sourceTree = "<group>"; };
 		45D22144B6135563B301E1C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		65C45CC51DEABE4E4EE6E493 /* TimeCookLiveActivity.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = TimeCookLiveActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		65C45CC51DEABE4E4EE6E493 /* TimeCookLiveActivity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TimeCookLiveActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		667E54D6246DD480072D8BF7 /* TimeCookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCookApp.swift; sourceTree = "<group>"; };
-		74958F04F3EB8F3934B64335 /* TimeCookCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TimeCookCore; path = TimeCookCore; sourceTree = SOURCE_ROOT; };
+		74958F04F3EB8F3934B64335 /* TimeCookCore */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TimeCookCore; sourceTree = SOURCE_ROOT; };
 		88C7A35E10194C780457BAAE /* TimeCookTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TimeCookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61BBE598F019D658FD9B3A8 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		B486D34F9DC81B9D6533CFD9 /* TimeCookLiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCookLiveActivityBundle.swift; sourceTree = "<group>"; };
 		B5E1DAA07438977C2766AF00 /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
 		C585181B9AA20F3A2D04E5A4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C5E2F817F5E2E8156BDF8AF6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		C84E6067F908BB8F635E5A58 /* TimeCook.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TimeCook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C84E6067F908BB8F635E5A58 /* TimeCook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFFBDBBC8C75A8077036537 /* CookingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingStore.swift; sourceTree = "<group>"; };
 		FB0C232FE46A7C2C7A529031 /* CookingLiveActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingLiveActivityController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -278,14 +278,12 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					29036FB0DCCF07F79037409E = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					46A07C7129EF5649787B5A3C = {
 						DevelopmentTeam = "";
 					};
 					E6E8531D47B467B7B87EFA78 = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -375,6 +373,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PJQSSVQC5P;
 				INFOPLIST_FILE = TimeCookLiveActivity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -412,6 +411,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PJQSSVQC5P;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TimeCook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
@@ -490,6 +490,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PJQSSVQC5P;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TimeCook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
@@ -590,6 +591,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PJQSSVQC5P;
 				INFOPLIST_FILE = TimeCookLiveActivity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
