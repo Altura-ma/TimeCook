@@ -1,0 +1,671 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		06E668F8E5EE72CE6AA24E42 /* TimeCookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8F12D1AF8CE2F8EDE93701A5 /* TimeCookCore */; };
+		120808505B03FA34B673499A /* TimeCookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 36B92CFF080B21D060019320 /* TimeCookCore */; };
+		1797C88C38B88E53655F7EF0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389694F131B658871E76EF97 /* ContentView.swift */; };
+		284690101E07864CEB679308 /* TimeCookLiveActivity.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 65C45CC51DEABE4E4EE6E493 /* TimeCookLiveActivity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		43A1EBEDFBB54E59C76E86B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34F65A95FC3D31C41BBE23CB /* Assets.xcassets */; };
+		6268D8DD3F81021B79E201C0 /* CookingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFFBDBBC8C75A8077036537 /* CookingStore.swift */; };
+		74B6139161D42D0DCD7852CD /* TimeCookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13168A4B51FAF7E92D14BDA6 /* TimeCookUITests.swift */; };
+		7EFF6AD9FB9FBA213DDBD550 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5E2F817F5E2E8156BDF8AF6 /* SwiftUI.framework */; };
+		82DEB991257BD076313C6135 /* TimeCookCore in Frameworks */ = {isa = PBXBuildFile; productRef = AB3BE0B0DF0614D6B4370AF4 /* TimeCookCore */; };
+		9355B8E4E864821BEFC552E7 /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E1DAA07438977C2766AF00 /* ActivityKit.framework */; };
+		B9E2A466AECA0DBBCE947A90 /* TimeCookLiveActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B486D34F9DC81B9D6533CFD9 /* TimeCookLiveActivityBundle.swift */; };
+		D81DF99EBA025BB199AF4190 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C585181B9AA20F3A2D04E5A4 /* WidgetKit.framework */; };
+		D875697C76A231602731CDC6 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BBE598F019D658FD9B3A8 /* NotificationScheduler.swift */; };
+		E9AC31303545BC2CAF0361CC /* TimeCookLiveActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395982C14F9486FD0072BB09 /* TimeCookLiveActivityWidget.swift */; };
+		FBD734C450CF4D9C7F723399 /* TimeCookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667E54D6246DD480072D8BF7 /* TimeCookApp.swift */; };
+		FDEB87574AFBB6E81CB59882 /* CookingLiveActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0C232FE46A7C2C7A529031 /* CookingLiveActivityController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		68C227938E85CB0B72A5F5A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E239356251AF2A49F2348095 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E6E8531D47B467B7B87EFA78;
+			remoteInfo = TimeCookLiveActivity;
+		};
+		B07804348E3943D33DF52CE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E239356251AF2A49F2348095 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29036FB0DCCF07F79037409E;
+			remoteInfo = TimeCook;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BC4A67298943D690689793C6 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				284690101E07864CEB679308 /* TimeCookLiveActivity.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		13168A4B51FAF7E92D14BDA6 /* TimeCookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCookUITests.swift; sourceTree = "<group>"; };
+		22F41D86813BB5795DD51466 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		34F65A95FC3D31C41BBE23CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		389694F131B658871E76EF97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		395982C14F9486FD0072BB09 /* TimeCookLiveActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCookLiveActivityWidget.swift; sourceTree = "<group>"; };
+		45D22144B6135563B301E1C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		65C45CC51DEABE4E4EE6E493 /* TimeCookLiveActivity.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = TimeCookLiveActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		667E54D6246DD480072D8BF7 /* TimeCookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCookApp.swift; sourceTree = "<group>"; };
+		74958F04F3EB8F3934B64335 /* TimeCookCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TimeCookCore; path = TimeCookCore; sourceTree = SOURCE_ROOT; };
+		88C7A35E10194C780457BAAE /* TimeCookTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TimeCookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A61BBE598F019D658FD9B3A8 /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
+		B486D34F9DC81B9D6533CFD9 /* TimeCookLiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCookLiveActivityBundle.swift; sourceTree = "<group>"; };
+		B5E1DAA07438977C2766AF00 /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
+		C585181B9AA20F3A2D04E5A4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		C5E2F817F5E2E8156BDF8AF6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		C84E6067F908BB8F635E5A58 /* TimeCook.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TimeCook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCFFBDBBC8C75A8077036537 /* CookingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingStore.swift; sourceTree = "<group>"; };
+		FB0C232FE46A7C2C7A529031 /* CookingLiveActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookingLiveActivityController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9346F6FBD3FB185307C0CBAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06E668F8E5EE72CE6AA24E42 /* TimeCookCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A067D33FD1FC89979B9D61C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EFF6AD9FB9FBA213DDBD550 /* SwiftUI.framework in Frameworks */,
+				D81DF99EBA025BB199AF4190 /* WidgetKit.framework in Frameworks */,
+				9355B8E4E864821BEFC552E7 /* ActivityKit.framework in Frameworks */,
+				82DEB991257BD076313C6135 /* TimeCookCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACCB7EFBDBAC5F9D9F2FD4E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				120808505B03FA34B673499A /* TimeCookCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4AD23A2EDCB479DCEE08F4EF /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				74958F04F3EB8F3934B64335 /* TimeCookCore */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		80AFE244A68D275CFCE710B1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				34F65A95FC3D31C41BBE23CB /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8E258618A5436E14AD34D7A9 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				389694F131B658871E76EF97 /* ContentView.swift */,
+				FB0C232FE46A7C2C7A529031 /* CookingLiveActivityController.swift */,
+				CCFFBDBBC8C75A8077036537 /* CookingStore.swift */,
+				A61BBE598F019D658FD9B3A8 /* NotificationScheduler.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		99B34CD2EA18E0B1B14F36A8 /* TimeCookTests */ = {
+			isa = PBXGroup;
+			children = (
+				13168A4B51FAF7E92D14BDA6 /* TimeCookUITests.swift */,
+			);
+			path = TimeCookTests;
+			sourceTree = "<group>";
+		};
+		AC8679E716B107960936B774 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5E1DAA07438977C2766AF00 /* ActivityKit.framework */,
+				C5E2F817F5E2E8156BDF8AF6 /* SwiftUI.framework */,
+				C585181B9AA20F3A2D04E5A4 /* WidgetKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C27489AF7A354EA04A4D2CD8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				667E54D6246DD480072D8BF7 /* TimeCookApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C96EC6092B7AED26123C2082 /* TimeCook */ = {
+			isa = PBXGroup;
+			children = (
+				45D22144B6135563B301E1C3 /* Info.plist */,
+				C27489AF7A354EA04A4D2CD8 /* App */,
+				8E258618A5436E14AD34D7A9 /* Features */,
+				80AFE244A68D275CFCE710B1 /* Resources */,
+			);
+			path = TimeCook;
+			sourceTree = "<group>";
+		};
+		E7AB3164745D2C43A15C07C4 /* TimeCookLiveActivity */ = {
+			isa = PBXGroup;
+			children = (
+				22F41D86813BB5795DD51466 /* Info.plist */,
+				B486D34F9DC81B9D6533CFD9 /* TimeCookLiveActivityBundle.swift */,
+				395982C14F9486FD0072BB09 /* TimeCookLiveActivityWidget.swift */,
+			);
+			path = TimeCookLiveActivity;
+			sourceTree = "<group>";
+		};
+		EF351DA5A3A9370CCC67A65B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C84E6067F908BB8F635E5A58 /* TimeCook.app */,
+				65C45CC51DEABE4E4EE6E493 /* TimeCookLiveActivity.appex */,
+				88C7A35E10194C780457BAAE /* TimeCookTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F32BD3CC155BE517609181F1 = {
+			isa = PBXGroup;
+			children = (
+				4AD23A2EDCB479DCEE08F4EF /* Packages */,
+				C96EC6092B7AED26123C2082 /* TimeCook */,
+				E7AB3164745D2C43A15C07C4 /* TimeCookLiveActivity */,
+				99B34CD2EA18E0B1B14F36A8 /* TimeCookTests */,
+				AC8679E716B107960936B774 /* Frameworks */,
+				EF351DA5A3A9370CCC67A65B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		29036FB0DCCF07F79037409E /* TimeCook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D44489076504DE362FD6124B /* Build configuration list for PBXNativeTarget "TimeCook" */;
+			buildPhases = (
+				7F5FB9BBE42F6CDB43E4619A /* Sources */,
+				9D5A0FE1DE38E7C08609DFB0 /* Resources */,
+				ACCB7EFBDBAC5F9D9F2FD4E6 /* Frameworks */,
+				BC4A67298943D690689793C6 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0794D2495F3C5244A8E651E7 /* PBXTargetDependency */,
+			);
+			name = TimeCook;
+			packageProductDependencies = (
+				36B92CFF080B21D060019320 /* TimeCookCore */,
+			);
+			productName = TimeCook;
+			productReference = C84E6067F908BB8F635E5A58 /* TimeCook.app */;
+			productType = "com.apple.product-type.application";
+		};
+		46A07C7129EF5649787B5A3C /* TimeCookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 029CC5B3DBF6A3EC0385C9B8 /* Build configuration list for PBXNativeTarget "TimeCookTests" */;
+			buildPhases = (
+				AF11394E036124FC86BAFFFC /* Sources */,
+				9346F6FBD3FB185307C0CBAF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C8AE9E72762CE98A908A7D86 /* PBXTargetDependency */,
+			);
+			name = TimeCookTests;
+			packageProductDependencies = (
+				8F12D1AF8CE2F8EDE93701A5 /* TimeCookCore */,
+			);
+			productName = TimeCookTests;
+			productReference = 88C7A35E10194C780457BAAE /* TimeCookTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E6E8531D47B467B7B87EFA78 /* TimeCookLiveActivity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46316E0A587611F780FFC406 /* Build configuration list for PBXNativeTarget "TimeCookLiveActivity" */;
+			buildPhases = (
+				4CCCE5FA9F82F3692DF797A7 /* Sources */,
+				9A067D33FD1FC89979B9D61C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimeCookLiveActivity;
+			packageProductDependencies = (
+				AB3BE0B0DF0614D6B4370AF4 /* TimeCookCore */,
+			);
+			productName = TimeCookLiveActivity;
+			productReference = 65C45CC51DEABE4E4EE6E493 /* TimeCookLiveActivity.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E239356251AF2A49F2348095 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					29036FB0DCCF07F79037409E = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					46A07C7129EF5649787B5A3C = {
+						DevelopmentTeam = "";
+					};
+					E6E8531D47B467B7B87EFA78 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A7568DD088976E3C54707F30 /* Build configuration list for PBXProject "TimeCook" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = F32BD3CC155BE517609181F1;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E9747248ACA8749394551360 /* XCLocalSwiftPackageReference "TimeCookCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = EF351DA5A3A9370CCC67A65B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				29036FB0DCCF07F79037409E /* TimeCook */,
+				E6E8531D47B467B7B87EFA78 /* TimeCookLiveActivity */,
+				46A07C7129EF5649787B5A3C /* TimeCookTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9D5A0FE1DE38E7C08609DFB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43A1EBEDFBB54E59C76E86B9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4CCCE5FA9F82F3692DF797A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9E2A466AECA0DBBCE947A90 /* TimeCookLiveActivityBundle.swift in Sources */,
+				E9AC31303545BC2CAF0361CC /* TimeCookLiveActivityWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F5FB9BBE42F6CDB43E4619A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1797C88C38B88E53655F7EF0 /* ContentView.swift in Sources */,
+				FDEB87574AFBB6E81CB59882 /* CookingLiveActivityController.swift in Sources */,
+				6268D8DD3F81021B79E201C0 /* CookingStore.swift in Sources */,
+				D875697C76A231602731CDC6 /* NotificationScheduler.swift in Sources */,
+				FBD734C450CF4D9C7F723399 /* TimeCookApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF11394E036124FC86BAFFFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74B6139161D42D0DCD7852CD /* TimeCookUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0794D2495F3C5244A8E651E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E6E8531D47B467B7B87EFA78 /* TimeCookLiveActivity */;
+			targetProxy = 68C227938E85CB0B72A5F5A6 /* PBXContainerItemProxy */;
+		};
+		C8AE9E72762CE98A908A7D86 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29036FB0DCCF07F79037409E /* TimeCook */;
+			targetProxy = B07804348E3943D33DF52CE7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0380122E4F50AA0DDBB992E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TimeCookLiveActivity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vibecode.timecook.LiveActivity;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		112BF5FE60342DF4362858E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vibecode.timecook.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TimeCook.app/TimeCook";
+			};
+			name = Debug;
+		};
+		2C7E5288C8342F1F7278E2CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = TimeCook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vibecode.timecook;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5441214F35DF57F0C6ED53CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 2;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		7B9B391DF8C71023B6B10C09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = TimeCook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vibecode.timecook;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CD4C675590E6F1916E348401 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 2;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		E2D154CB093B993DDF2A0BB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vibecode.timecook.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TimeCook.app/TimeCook";
+			};
+			name = Release;
+		};
+		F051D05D3CD1BFFC373479E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TimeCookLiveActivity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vibecode.timecook.LiveActivity;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		029CC5B3DBF6A3EC0385C9B8 /* Build configuration list for PBXNativeTarget "TimeCookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112BF5FE60342DF4362858E4 /* Debug */,
+				E2D154CB093B993DDF2A0BB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		46316E0A587611F780FFC406 /* Build configuration list for PBXNativeTarget "TimeCookLiveActivity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0380122E4F50AA0DDBB992E9 /* Debug */,
+				F051D05D3CD1BFFC373479E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A7568DD088976E3C54707F30 /* Build configuration list for PBXProject "TimeCook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD4C675590E6F1916E348401 /* Debug */,
+				5441214F35DF57F0C6ED53CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D44489076504DE362FD6124B /* Build configuration list for PBXNativeTarget "TimeCook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B9B391DF8C71023B6B10C09 /* Debug */,
+				2C7E5288C8342F1F7278E2CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		E9747248ACA8749394551360 /* XCLocalSwiftPackageReference "TimeCookCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = TimeCookCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		36B92CFF080B21D060019320 /* TimeCookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TimeCookCore;
+		};
+		8F12D1AF8CE2F8EDE93701A5 /* TimeCookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TimeCookCore;
+		};
+		AB3BE0B0DF0614D6B4370AF4 /* TimeCookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TimeCookCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = E239356251AF2A49F2348095 /* Project object */;
+}
